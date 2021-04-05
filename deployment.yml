@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: travix-test
+  namespace: travix-dev
+spec:
+  selector:
+    matchLabels:
+      app: web
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: allloush92/travix_test:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
