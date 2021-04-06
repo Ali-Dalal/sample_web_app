@@ -1,4 +1,4 @@
-#Go Sample web app
+# Go Sample web app
 
 This repo contains a go sample web app to demonstrate deployment of go application in k8s environment
 
