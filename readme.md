@@ -15,6 +15,7 @@ https://hub.docker.com/r/allloush92/travix_test
 You can build the image locally using the following command
 
 ```shell
+git pull https://github.com/Ali-Dalal/sample_web_app.git
 docker build -t {TAG} . //replace tag with desired value
 ```
 
