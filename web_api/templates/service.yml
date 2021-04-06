@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: travix-test-service
-  namespace: travix-dev
+  name: {{ .Release.Name }}-travix-test-service
+  namespace: {{ .Values.namespace }}
 spec:
-  type: NodePort
+  type: {{ .Values.service.type }}
   selector:
     app: web
   ports:
-    - protocol: TCP
-      port: 3000
-      targetPort: 3000
-      nodePort: 31704
+    - protocol: {{ .Values.service.protocol }}
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      nodePort: {{ .Values.service.nodePort }}

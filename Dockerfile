@@ -1,10 +1,18 @@
-FROM golang:1.16
+FROM golang:1.16 AS builder
 
-WORKDIR home
+WORKDIR /build
 
 COPY . .
 
-RUN go build app.go
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+
+WORKDIR home
+
+COPY --from=builder /build/app .
 
 EXPOSE 3000
 

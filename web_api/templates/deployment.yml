@@ -1,13 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: travix-test
-  namespace: travix-dev
+  name: {{ .Release.Name }}-travix-test
+  namespace: {{ .Values.namespace }}
 spec:
   selector:
     matchLabels:
       app: web
-  replicas: 2
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
   template:
     metadata:
       labels:
@@ -15,7 +17,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: allloush92/travix_test:1.0.0
-          imagePullPolicy: Always
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 3000
